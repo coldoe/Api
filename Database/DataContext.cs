@@ -11,6 +11,7 @@ namespace WebApplication1.Database
     {
         //it take from startup class
         //configuration of services
+        //options
         public DataContext(DbContextOptions<DataContext> opt) : base(opt)
         {
 
