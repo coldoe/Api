@@ -14,5 +14,9 @@ namespace WebApplication1.Models
         public string TaskDescription{ get; set; }
         public DateTime CreateTime{ get; set; }
 
+        public TodoTask()
+        {
+            this.CreateTime = DateTime.Now;
+        }
     }
 }
