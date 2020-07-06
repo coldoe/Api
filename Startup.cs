@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using WebApplication1.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebApplication1
 {
@@ -31,6 +32,15 @@ namespace WebApplication1
             services.AddDbContext<DataContext>(opt => opt.UseSqlServer(
                 Configuration.GetConnectionString("DefaultConnectionStringDevelopment")));
 
+            // Add Cors
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
+
             services.AddControllers();
         }
 
@@ -41,6 +51,7 @@ namespace WebApplication1
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseCors("MyPolicy");
 
             app.UseHttpsRedirection();
 
